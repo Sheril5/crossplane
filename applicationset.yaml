@@ -1,0 +1,59 @@
+# Source: argocd-apps/templates/projects.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: crossplane-proj
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: dev-crossplane
+  sourceRepos:
+    - '*'
+  destinations:
+    - name: in-cluster
+      namespace: '*'
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+---
+# Source: argocd-apps/templates/applicationsets.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: crossplane-app
+  namespace: argocd
+  generators:
+    - git:
+        directories:
+        - path: manifests/*
+        repoURL: https://gitlab.com/tariandev_intelops/intelops_gitops_dev.git
+        revision: main
+  syncPolicy:
+    preserveResourcesOnDeletion: false
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: crossplane-proj
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+      source:
+        repoURL: https://github.com/Sheril5/crossplane.git
+        path: '{{path}}'
+        targetRevision: main
+      destination:
+        name: in-cluster
+        namespace: '{{path.basename}}'
+      syncPolicy:
+        syncOptions:
+        - CreateNamespace=true
+        automated:
+          selfHeal: true
+          prune: true
+
