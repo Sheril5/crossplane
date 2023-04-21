@@ -2,6 +2,8 @@ apiVersion: eks.aws.crossplane.io/v1beta1
 kind: Cluster
 metadata:
   name: aws-cluster
+  labels:
+    example: "true"
 spec:
   forProvider:
     region: us-east-1
