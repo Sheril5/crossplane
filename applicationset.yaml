@@ -30,7 +30,7 @@ metadata:
     - git:
         directories:
         - path: manifests/*
-        repoURL: https://gitlab.com/tariandev_intelops/intelops_gitops_dev.git
+        repoURL: https://github.com/Sheril5/crossplane.git
         revision: main
   syncPolicy:
     preserveResourcesOnDeletion: false
