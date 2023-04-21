@@ -19,4 +19,4 @@ spec:
     name: azure-provider
   writeConnectionSecretToRef:
     namespace: crossplane-system
-    name: azure-cluster
+    name: example-akscluster
