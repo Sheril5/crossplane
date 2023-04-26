@@ -8,10 +8,10 @@ spec:
       # git repository to get the variables from
       repoURL: https://github.com/Sheril5/crossplane.git
       # branch used to get the variables from 
-      revision: HEAD
+      revision: main
       directories:
       # path to the directory that includes directories to read as variables
-      - path: manifests/*
+      - path: manifests/civo
   template:
     metadata:
       # basename is the name of the directory not the full path
@@ -25,6 +25,6 @@ spec:
         # path to read manifests from, here it's the full path not only the name of the directory
         path: '{{path}}'
       destination:
-        server: https://kubernetes.default.svc
+        server: dev-cluster
         # different namespaces named after the directories names to be used as destinations
         namespace: '{{path.basename}}'
