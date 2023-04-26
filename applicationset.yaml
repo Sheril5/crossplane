@@ -21,10 +21,11 @@ spec:
       source:
         # source repo, in this example both repositories are the same
         repoURL: https://github.com/Sheril5/crossplane.git
-        targetRevision: HEAD
+        targetRevision: main
         # path to read manifests from, here it's the full path not only the name of the directory
         path: '{{path}}'
       destination:
-        server: dev-cluster
+        server: in-cluster
         # different namespaces named after the directories names to be used as destinations
         namespace: '{{path.basename}}'
+
