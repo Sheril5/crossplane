@@ -29,7 +29,7 @@ metadata:
   generators:
     - git:
         directories:
-        - path: manifests/*
+        - path: manifests/civo
         repoURL: https://github.com/Sheril5/crossplane.git
         revision: main
   syncPolicy:
