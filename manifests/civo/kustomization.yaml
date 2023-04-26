@@ -1,8 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-metadata:
-  name: my-app
-spec:
-  resources:
-    - providerconfig.yaml
-    - cluster.yaml
+resources:
+- providerconfig.yaml
+- cluster.yaml
+
