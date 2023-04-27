@@ -7,7 +7,7 @@ spec:
   providerConfigRef:
     name: azure-provider
 ---
-apiVersion: compute.azure.crossplane.io/v1alpha3
+apiVersion: azure.crossplane.io/v1alpha3
 kind: AKSCluster
 metadata:
   name: example-akscluster
