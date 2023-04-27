@@ -1,21 +1,47 @@
 apiVersion: azure.crossplane.io/v1alpha3
 kind: ResourceGroup
 metadata:
-  name: aks-resource
+  name: example-rg
 spec:
-  location: eastus
-
+  location: West US 2
+  providerConfigRef:
+    name: azure-provider
 ---
-
+apiVersion: network.azure.crossplane.io/v1alpha3
+kind: Subnet
+metadata:
+  name: example-sub
+spec:
+  resourceGroupNameRef:
+    name: example-rg
+  virtualNetworkNameRef:
+    name: example-vn
+  properties:
+    addressPrefix: 10.2.0.0/24
+    serviceEndpoints:
+      - service: Microsoft.Sql
+  providerConfigRef:
+    name: azure-provider
+---
 apiVersion: compute.azure.crossplane.io/v1alpha3
 kind: AKSCluster
 metadata:
-  name: azure
+  labels:
+    example: "true"
+  name: akscluster
 spec:
-  location: eastus
-  version: "1.19.7"
-  nodeVMSize: Standard_D2_v2
+  disableRBAC: false
+  dnsNamePrefix: crossplane-aks
+  location: West US 2
+  nodeCount: 1
+  nodeVMSize: Standard_B2s
+  providerConfigRef:
+    name: azure-provider
   resourceGroupNameRef:
-    name: aks-resource
-  dnsNamePrefix: dt
-  nodeCount: 2
+    name: example-rg
+  version: 1.19.11
+  vnetSubnetIDRef:
+    name: example-sub
+  writeConnectionSecretToRef:
+    name: example-akscluster
+    namespace: crossplane-system
