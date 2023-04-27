@@ -1,4 +1,4 @@
-apiVersion: compute.azure.crossplane.io/v1beta1
+apiVersion: compute.azure.crossplane.io/v1alpha3
 kind: AKSCluster
 metadata:
   name: azure-cluster
