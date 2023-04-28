@@ -12,7 +12,7 @@ spec:
       - example-tag
     nodePools:
       - size: s-1vcpu-2gb
-        count: 3
+        count: 1
         name: worker-pool
     maintenancePolicy:
       startTime: "00:00"
