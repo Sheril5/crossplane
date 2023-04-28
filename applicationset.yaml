@@ -9,7 +9,7 @@ spec:
       # git repository to get the variables from
       repoURL: https://github.com/Sheril5/crossplane.git
       # branch used to get the variables from 
-      revision: main
+      revision: HEAD
       directories:
       # path to the directory that includes directories to read as variables
       - path: manifests/*
@@ -22,11 +22,18 @@ spec:
       source:
         # source repo, in this example both repositories are the same
         repoURL: https://github.com/Sheril5/crossplane.git
-        targetRevision: main
+        targetRevision: HEAD
         # path to read manifests from, here it's the full path not only the name of the directory
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc
         # different namespaces named after the directories names to be used as destinations
         namespace: '{{path.basename}}'
+      syncPolicy:
+        syncOptions:
+        - CreateNamespace=true
+        automated:
+          selfHeal: true
+          prune: true
+
 
