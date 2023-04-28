@@ -3,5 +3,7 @@ kind: Kustomization
 resources:
 - providerconfig.yaml
 - resource.yaml
+- network.yaml
+- subnet.yaml
 - cluster.yaml
 
