@@ -3,5 +3,4 @@ kind: Kustomization
 resources:
 - providerconfig.yaml
 - cluster.yaml
-- cluster2.yaml
 
